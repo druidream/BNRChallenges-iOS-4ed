@@ -51,8 +51,7 @@
 
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale
 {
-    CGRect r = view.frame;
-    view.frame = CGRectMake(r.origin.x * scale, r.origin.y * scale, r.size.width * scale, r.size.height * scale);
+    // intentionally left blank
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
