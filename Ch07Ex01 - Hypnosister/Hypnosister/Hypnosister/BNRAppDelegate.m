@@ -9,6 +9,12 @@
 #import "BNRAppDelegate.h"
 #import "BNRHypnosisView.h"
 
+@interface BNRAppDelegate ()
+
+@property (strong, nonatomic) BNRHypnosisView *hypnosisView;
+
+@end
+
 @implementation BNRAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -18,29 +24,35 @@
 
     // Create CGRects for frames
     CGRect screenRect = self.window.bounds;
-    CGRect bigRect = screenRect;
-    bigRect.size.width *= 2.0;
-
+    
     // Create a screen-sized scroll view and add it to the window
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:screenRect];
-    scrollView.pagingEnabled = YES;
-    [self.window addSubview:scrollView];
-
-    // Create a screen-sized hypnosis view and add it to the scroll view
-    BNRHypnosisView *hypnosisView = [[BNRHypnosisView alloc] initWithFrame:screenRect];
-    [scrollView addSubview:hypnosisView];
-
-    // Add a second screen-sized hypnosis view just off screen to the right
-    screenRect.origin.x = screenRect.size.width;
-    BNRHypnosisView *anotherView = [[BNRHypnosisView alloc] initWithFrame:screenRect];
-    [scrollView addSubview:anotherView];
-
-    // Tell the scroll view how big its content area is
-    scrollView.contentSize = bigRect.size;
+    scrollView.pagingEnabled = NO;
+    scrollView.delegate = self;
+    scrollView.minimumZoomScale = 0.5;
+    scrollView.maximumZoomScale = 2.0;
+    
+    self.hypnosisView = [[BNRHypnosisView alloc] initWithFrame:screenRect];
+    [scrollView addSubview:self.hypnosisView];
+    
+    UIViewController *vc = [[UIViewController alloc] init];
+    [vc.view addSubview:scrollView];
+    self.window.rootViewController = vc;
 
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    return self.hypnosisView;
+}
+
+- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale
+{
+    CGRect r = view.frame;
+    view.frame = CGRectMake(r.origin.x * scale, r.origin.y * scale, r.size.width * scale, r.size.height * scale);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
