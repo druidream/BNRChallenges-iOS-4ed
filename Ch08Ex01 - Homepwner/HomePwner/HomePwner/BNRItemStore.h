@@ -13,6 +13,8 @@
 @interface BNRItemStore : NSObject
 
 @property (nonatomic, readonly) NSArray *allItems;
+@property (nonatomic, readonly) NSArray *higherValueItems;
+@property (nonatomic, readonly) NSArray *lowerValueItems;
 
 // Notice that this is a class method and prefixed with a + instead of a -
 + (instancetype)sharedStore;

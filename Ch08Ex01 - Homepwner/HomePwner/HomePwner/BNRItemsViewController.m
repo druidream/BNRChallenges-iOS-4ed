@@ -40,7 +40,16 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[[BNRItemStore sharedStore] allItems] count];
+    NSArray *items = nil;
+    switch (section) {
+        case 0:
+            items = [[BNRItemStore sharedStore] higherValueItems];
+            break;
+        case 1:
+            items = [[BNRItemStore sharedStore] lowerValueItems];
+            break;
+    }
+    return [items count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -51,12 +60,38 @@
     // Set the text on the cell with the description of the item
     // that is at the nth index of items, where n = row this cell
     // will appear in on the tableview
-    NSArray *items = [[BNRItemStore sharedStore] allItems];
-    BNRItem *item = items[indexPath.row];
+    NSArray *items = nil;
+    BNRItem *item = nil;
+    switch (indexPath.section) {
+        case 0:
+            items = [[BNRItemStore sharedStore] higherValueItems];
+            item = items[indexPath.row];
+            break;
+        case 1:
+            items = [[BNRItemStore sharedStore] lowerValueItems];
+            item = items[indexPath.row];
+            break;
+    }
 
     cell.textLabel.text = [item description];
 
     return cell;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    switch (section) {
+        case 0:
+            return @"higher value items";
+        case 1:
+            return @"lower value items";
+    }
+    return @"unknown";
 }
 
 @end
