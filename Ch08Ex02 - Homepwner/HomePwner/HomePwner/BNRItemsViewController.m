@@ -59,4 +59,13 @@
     return cell;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, UIScreen.mainScreen.bounds.size.width, 40)];
+    label.text = @"No more items!";
+    label.textColor = UIColor.grayColor;
+    label.textAlignment = NSTextAlignmentCenter;
+    return label;
+}
+
 @end
