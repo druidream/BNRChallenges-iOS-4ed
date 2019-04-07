@@ -36,47 +36,43 @@
 
     [self.tableView registerClass:[UITableViewCell class]
            forCellReuseIdentifier:@"UITableViewCell"];
+
+    [self.tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg.jpg"]]];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[[BNRItemStore sharedStore] allItems] count];
+    return [[[BNRItemStore sharedStore] allItems] count] + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Get a new or recycled cell
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
-
+    
     // Set the text on the cell with the description of the item
     // that is at the nth index of items, where n = row this cell
     // will appear in on the tableview
-    NSArray *items = [[BNRItemStore sharedStore] allItems];
-    BNRItem *item = items[indexPath.row];
-
-    cell.textLabel.text = [item description];
-
+    if (indexPath.row != [tableView numberOfRowsInSection:0] - 1) {
+        NSArray *items = [[BNRItemStore sharedStore] allItems];
+        BNRItem *item = items[indexPath.row];
+        
+        cell.textLabel.text = [item description];
+    } else {
+        cell.textLabel.text = @"No more items!";
+    }
+    cell.backgroundColor = UIColor.clearColor;
+    
     return cell;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, UIScreen.mainScreen.bounds.size.width, 40)];
-    label.text = @"No more items!";
-    label.textColor = UIColor.whiteColor;
-    label.textAlignment = NSTextAlignmentCenter;
-    label.backgroundColor = UIColor.lightGrayColor;
-    return label;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60.0f;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    return 44.0f;
+    if (indexPath.row == [tableView numberOfRowsInSection:0] - 1) {
+        return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+    } else {
+        return 60.0f;
+    }
 }
 
 @end
