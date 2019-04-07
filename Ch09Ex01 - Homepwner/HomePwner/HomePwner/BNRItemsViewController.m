@@ -102,6 +102,11 @@
                                         toIndex:destinationIndexPath.row];
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return @"Remove";
+}
+
 - (IBAction)addNewItem:(id)sender
 {
     // Create a new BNRItem and add it to the store
