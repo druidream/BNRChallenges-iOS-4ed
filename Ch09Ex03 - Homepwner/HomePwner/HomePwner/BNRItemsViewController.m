@@ -59,7 +59,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[[BNRItemStore sharedStore] allItems] count];
+    return [[[BNRItemStore sharedStore] allItems] count] + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -70,11 +70,15 @@
     // Set the text on the cell with the description of the item
     // that is at the nth index of items, where n = row this cell
     // will appear in on the tableview
-    NSArray *items = [[BNRItemStore sharedStore] allItems];
-    BNRItem *item = items[indexPath.row];
-
-    cell.textLabel.text = [item description];
-
+    if (indexPath.row != [tableView numberOfRowsInSection:0] - 1) {
+        NSArray *items = [[BNRItemStore sharedStore] allItems];
+        BNRItem *item = items[indexPath.row];
+        
+        cell.textLabel.text = [item description];
+    } else {
+        cell.textLabel.text = @"No more items!";
+    }
+    
     return cell;
 }
 
@@ -100,6 +104,23 @@
 {
     [[BNRItemStore sharedStore] moveItemAtIndex:sourceIndexPath.row
                                         toIndex:destinationIndexPath.row];
+}
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row != [tableView numberOfRowsInSection:0] - 1) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
+{
+    if (proposedDestinationIndexPath.row == [tableView numberOfRowsInSection:0] - 1) {
+        return sourceIndexPath;
+    }
+    return proposedDestinationIndexPath;
 }
 
 - (IBAction)addNewItem:(id)sender
