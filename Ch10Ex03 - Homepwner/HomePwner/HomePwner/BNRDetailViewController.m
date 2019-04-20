@@ -8,6 +8,7 @@
 
 #import "BNRDetailViewController.h"
 #import "BNRItem.h"
+#import "BNRDatePickerViewController.h"
 
 @interface BNRDetailViewController ()
 
@@ -19,6 +20,14 @@
 @end
 
 @implementation BNRDetailViewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(editDone)];
+    self.navigationItem.rightBarButtonItem = bbi;
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -62,4 +71,14 @@
     self.navigationItem.title = _item.itemName;
 }
 
+- (void)editDone
+{
+    [self.valueField resignFirstResponder];
+}
+
+- (IBAction)changeDateButtonDidClick:(id)sender {
+    BNRDatePickerViewController *vc = [[BNRDatePickerViewController alloc] init];
+    vc.item = self.item;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 @end

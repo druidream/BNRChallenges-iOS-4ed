@@ -10,7 +10,7 @@
 
 @interface BNRItem ()
 
-@property (nonatomic, strong) NSDate *dateCreated;
+//@property (nonatomic, strong) NSDate *dateCreated;
 
 @end
 
