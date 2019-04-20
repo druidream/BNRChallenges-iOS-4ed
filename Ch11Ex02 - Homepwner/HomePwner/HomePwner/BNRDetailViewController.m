@@ -135,4 +135,9 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     return YES;
 }
 
+- (IBAction)deleteImage:(id)sender {
+    self.imageView.image = nil;
+    [[BNRImageStore sharedStore] deleteImageForKey:self.item.itemKey];
+}
+
 @end
