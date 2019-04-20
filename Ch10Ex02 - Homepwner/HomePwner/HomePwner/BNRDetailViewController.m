@@ -20,6 +20,14 @@
 
 @implementation BNRDetailViewController
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(editDone)];
+    self.navigationItem.rightBarButtonItem = bbi;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -60,6 +68,11 @@
 {
     _item = item;
     self.navigationItem.title = _item.itemName;
+}
+
+- (void)editDone
+{
+    [self.valueField resignFirstResponder];
 }
 
 @end
