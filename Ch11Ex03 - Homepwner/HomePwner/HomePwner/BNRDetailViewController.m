@@ -94,6 +94,19 @@
     }
 
     imagePicker.delegate = self;
+    
+    // As described in UIImagePickerController documentation
+    /*
+    The UIImagePickerController class supports portrait mode only. This class is intended to be used as-is and does not support subclassing. The view hierarchy for this class is private and must not be modified, with one exception. You can assign a custom view to the cameraOverlayView property and use that view to present additional information or manage the interactions between the camera interface and your code.
+     */
+    UILabel *overlay = [[UILabel alloc] init];
+    overlay.text = @"+";
+    CGRect rect = UIScreen.mainScreen.bounds;
+    int width = 100;
+    int height = 100;
+    overlay.frame = CGRectMake(rect.size.width / 2 - width / 2, rect.size.height / 2 - height / 2, width, height);
+    overlay.textAlignment = NSTextAlignmentCenter;
+    imagePicker.cameraOverlayView = overlay;
 
     // Place image picker on the screen
     [self presentViewController:imagePicker animated:YES completion:NULL];
