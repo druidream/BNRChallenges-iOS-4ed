@@ -10,4 +10,7 @@
 
 @interface BNRDrawViewController : UIViewController
 
+- (void)saveState;
+- (void)loadState;
+
 @end

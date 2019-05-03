@@ -124,4 +124,17 @@
     [self setNeedsDisplay];
 }
 
+- (void)setLines:(NSArray *)lines
+{
+    if (lines) {
+        self.finishedLines = [lines mutableCopy];
+    }
+    [self setNeedsDisplay];
+}
+
+- (NSArray *)getLines
+{
+    return self.finishedLines;
+}
+
 @end

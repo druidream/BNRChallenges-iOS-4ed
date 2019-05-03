@@ -10,4 +10,7 @@
 
 @interface BNRDrawView : UIView
 
+- (void)setLines:(NSArray *)lines;
+- (NSArray *)getLines;
+
 @end
