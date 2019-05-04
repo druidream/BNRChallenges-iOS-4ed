@@ -22,6 +22,7 @@
 		52CEEAAF187F3E4A0037259A /* BNRLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CEEAAE187F3E4A0037259A /* BNRLine.m */; };
 		52CEEAB2187F3EA90037259A /* BNRDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CEEAB1187F3EA90037259A /* BNRDrawViewController.m */; };
 		52CEEAB5187F3ECE0037259A /* BNRDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CEEAB4187F3ECE0037259A /* BNRDrawView.m */; };
+		6A08423E227DE9B600D5E75A /* BNRCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A08423D227DE9B600D5E75A /* BNRCircle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 		52CEEAB1187F3EA90037259A /* BNRDrawViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRDrawViewController.m; sourceTree = "<group>"; };
 		52CEEAB3187F3ECE0037259A /* BNRDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRDrawView.h; sourceTree = "<group>"; };
 		52CEEAB4187F3ECE0037259A /* BNRDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRDrawView.m; sourceTree = "<group>"; };
+		6A08423C227DE9B600D5E75A /* BNRCircle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BNRCircle.h; sourceTree = "<group>"; };
+		6A08423D227DE9B600D5E75A /* BNRCircle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BNRCircle.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +123,8 @@
 				52CEEA8E187F3E310037259A /* BNRAppDelegate.m */,
 				52CEEAAD187F3E4A0037259A /* BNRLine.h */,
 				52CEEAAE187F3E4A0037259A /* BNRLine.m */,
+				6A08423C227DE9B600D5E75A /* BNRCircle.h */,
+				6A08423D227DE9B600D5E75A /* BNRCircle.m */,
 				52CEEAB3187F3ECE0037259A /* BNRDrawView.h */,
 				52CEEAB4187F3ECE0037259A /* BNRDrawView.m */,
 				52CEEAB0187F3EA90037259A /* BNRDrawViewController.h */,
@@ -257,6 +262,7 @@
 			files = (
 				52CEEAB5187F3ECE0037259A /* BNRDrawView.m in Sources */,
 				52CEEA8B187F3E310037259A /* main.m in Sources */,
+				6A08423E227DE9B600D5E75A /* BNRCircle.m in Sources */,
 				52CEEAB2187F3EA90037259A /* BNRDrawViewController.m in Sources */,
 				52CEEAAF187F3E4A0037259A /* BNRLine.m in Sources */,
 				52CEEA8F187F3E310037259A /* BNRAppDelegate.m in Sources */,
