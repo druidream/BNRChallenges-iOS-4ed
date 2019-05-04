@@ -46,8 +46,8 @@
 - (void)drawRect:(CGRect)rect
 {
     // Draw finished lines in black
-    [[UIColor blackColor] set];
     for (BNRLine *line in self.finishedLines) {
+        [[line color] set];
         [self strokeLine:line];
     }
 
@@ -102,6 +102,8 @@
     for (UITouch *t in touches) {
         NSValue *key = [NSValue valueWithNonretainedObject:t];
         BNRLine *line = self.linesInProgress[key];
+        line.color = [self colorFromX:(line.end.x - line.begin.x)
+                                    Y:(line.end.y - line.begin.y)];
 
         [self.finishedLines addObject:line];
         [self.linesInProgress removeObjectForKey:key];
@@ -122,6 +124,15 @@
     }
 
     [self setNeedsDisplay];
+}
+
+- (UIColor *)colorFromX:(double)x Y:(double)y
+{
+    // (-PI, PI]
+    double angle = atan2(y, x);
+//    NSLog(@"angle: %f", angle);
+    double normalized = (angle + M_PI) / (M_PI * 2);
+    return [UIColor colorWithHue:normalized saturation:1.0f brightness:1.0f alpha:1.0f];
 }
 
 @end
