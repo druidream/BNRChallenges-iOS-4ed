@@ -207,6 +207,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Big Nerd Ranch";
 				TargetAttributes = {
+					52CEEA7A187F3E310037259A = {
+						DevelopmentTeam = 7EWD2V278C;
+					};
 					52CEEA95187F3E310037259A = {
 						TestTargetID = 52CEEA7A187F3E310037259A;
 					};
@@ -217,6 +220,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 52CEEA72187F3E310037259A;
@@ -378,9 +382,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = 7EWD2V278C;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TouchTracker/TouchTracker-Prefix.pch";
 				INFOPLIST_FILE = "TouchTracker/TouchTracker-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = dream.TouchTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -391,9 +397,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = 7EWD2V278C;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TouchTracker/TouchTracker-Prefix.pch";
 				INFOPLIST_FILE = "TouchTracker/TouchTracker-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = dream.TouchTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -460,6 +468,7 @@
 				52CEEAA9187F3E310037259A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		52CEEAAA187F3E310037259A /* Build configuration list for PBXNativeTarget "TouchTrackerTests" */ = {
 			isa = XCConfigurationList;
@@ -468,6 +477,7 @@
 				52CEEAAC187F3E310037259A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

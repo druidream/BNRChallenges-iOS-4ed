@@ -226,6 +226,10 @@
 - (void)touchesBegan:(NSSet *)touches
            withEvent:(UIEvent *)event
 {
+    if (self.selectedLine) {
+        return;
+    }
+    
     // Let's put in a log statement to see the order of events
     NSLog(@"%@", NSStringFromSelector(_cmd));
 
@@ -246,6 +250,10 @@
 - (void)touchesMoved:(NSSet *)touches
            withEvent:(UIEvent *)event
 {
+    if (self.selectedLine) {
+        return;
+    }
+    
     // Let's put in a log statement to see the order of events
     NSLog(@"%@", NSStringFromSelector(_cmd));
 
@@ -262,6 +270,10 @@
 - (void)touchesEnded:(NSSet *)touches
            withEvent:(UIEvent *)event
 {
+    if (self.selectedLine) {
+        return;
+    }
+    
     // Let's put in a log statement to see the order of events
     NSLog(@"%@", NSStringFromSelector(_cmd));
 
