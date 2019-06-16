@@ -229,7 +229,7 @@
     if (self.selectedLine) {
         return;
     }
-
+    
     // Let's put in a log statement to see the order of events
     NSLog(@"%@", NSStringFromSelector(_cmd));
 
@@ -253,7 +253,7 @@
     if (self.selectedLine) {
         return;
     }
-
+    
     // Let's put in a log statement to see the order of events
     NSLog(@"%@", NSStringFromSelector(_cmd));
 
@@ -273,7 +273,7 @@
     if (self.selectedLine) {
         return;
     }
-
+    
     // Let's put in a log statement to see the order of events
     NSLog(@"%@", NSStringFromSelector(_cmd));
 
