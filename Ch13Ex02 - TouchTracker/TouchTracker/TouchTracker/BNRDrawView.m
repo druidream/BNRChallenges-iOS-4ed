@@ -12,10 +12,12 @@
 @interface BNRDrawView () <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UIPanGestureRecognizer *moveRecognizer;
+@property (nonatomic, strong) UIPanGestureRecognizer *drawRecognizer;
 @property (nonatomic, strong) NSMutableDictionary *linesInProgress;
 @property (nonatomic, strong) NSMutableArray *finishedLines;
 
 @property (nonatomic, weak) BNRLine *selectedLine;
+@property (nonatomic, assign) double velocity;
 
 @end
 
@@ -56,6 +58,10 @@
         self.moveRecognizer.delegate = self;
         self.moveRecognizer.cancelsTouchesInView = NO;
         [self addGestureRecognizer:self.moveRecognizer];
+        
+        self.drawRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
+        self.drawRecognizer.cancelsTouchesInView = NO;
+        [self addGestureRecognizer:self.drawRecognizer];
     }
 
     return self;
@@ -69,7 +75,11 @@
 - (void)strokeLine:(BNRLine *)line
 {
     UIBezierPath *bp = [UIBezierPath bezierPath];
-    bp.lineWidth = 10;
+    if (line.lineWidth == 0) { // drawing line
+        bp.lineWidth = [self lineWidthFrom:self.velocity];
+    } else {
+        bp.lineWidth = line.lineWidth;
+    }
     bp.lineCapStyle = kCGLineCapRound;
 
     [bp moveToPoint:line.begin];
@@ -114,6 +124,29 @@
         [self setNeedsDisplay];
 
         [gr setTranslation:CGPointZero inView:self];
+    }
+}
+
+- (void)pan:(UIPanGestureRecognizer *)gr
+{
+    switch (gr.state) {
+        case UIGestureRecognizerStateBegan:
+            NSLog(@"Began   %@", NSStringFromCGPoint([gr velocityInView:self]));
+            self.velocity = hypot([gr velocityInView:self].x, [gr velocityInView:self].y);
+            break;
+            
+        case UIGestureRecognizerStateChanged:
+            NSLog(@"Changed %@", NSStringFromCGPoint([gr velocityInView:self]));
+            self.velocity = hypot([gr velocityInView:self].x, [gr velocityInView:self].y);
+            break;
+            
+        case UIGestureRecognizerStateEnded:
+            NSLog(@"Ended   %@", NSStringFromCGPoint([gr velocityInView:self]));
+            self.velocity = hypot([gr velocityInView:self].x, [gr velocityInView:self].y);
+            break;
+            
+        default:
+            break;
     }
 }
 
@@ -178,6 +211,9 @@
     shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)other
 {
     if (gestureRecognizer == self.moveRecognizer) {
+        return YES;
+    }
+    if (gestureRecognizer == self.drawRecognizer) {
         return YES;
     }
     return NO;
@@ -268,6 +304,7 @@
     for (UITouch *t in touches) {
         NSValue *key = [NSValue valueWithNonretainedObject:t];
         BNRLine *line = self.linesInProgress[key];
+        line.lineWidth = [self lineWidthFrom:self.velocity];
 
         [self.finishedLines addObject:line];
         [self.linesInProgress removeObjectForKey:key];
@@ -288,6 +325,11 @@
     }
 
     [self setNeedsDisplay];
+}
+
+- (double)lineWidthFrom:(double)velocity
+{
+    return fmin(10 * (1000 / velocity), 30.0);
 }
 
 @end
